@@ -1,0 +1,21 @@
+Data from the TF08 paper (SAR and QSAR in Environmental Research).
+
+.
+├── epafhm070615
+│   ├── data
+│   │   ├── lc50_mmol.act
+│   │   └── lc50_mmol.smi
+│   └── src
+│       ├── EPAFHM_v4a_617_15Jun2007.sdf
+│       └── Rakefile # creates act and smi from sdf
+├── fdamdd070725
+│   ├── dose_mrdd_mmol
+│   │   └── data
+│   │       ├── dose_mrdd_mmol.act
+│   │       └── dose_mrdd_mmol.smi
+│   └── src
+│       ├── FDAMDD_v3a_1216_25Jul2007.sdf
+│       └── Rakefile
+└── README
+
+
