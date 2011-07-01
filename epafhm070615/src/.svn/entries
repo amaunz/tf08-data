@@ -1,0 +1,52 @@
+8
+
+dir
+1412
+svn+ssh://andi@www.in-silico.de/var/local/svn-pub/opentox/data/epafhm070615/src
+svn+ssh://andi@www.in-silico.de/var/local/svn-pub
+
+
+
+2007-12-11T14:51:15.598464Z
+1349
+ch
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+48c062ec-50f8-0310-9d98-bfdb860cff71
+
+Rakefile
+file
+
+
+
+
+2007-12-12T10:21:07.000000Z
+8d894dec77ac0fbbabdb5758414436f0
+2007-12-10T18:39:38.491069Z
+1338
+ch
+
+EPAFHM_v4a_617_15Jun2007.sdf
+file
+
+
+
+
+2007-12-12T10:21:07.000000Z
+af49311dac417f937b3a690ab7f5e2e4
+2007-12-11T14:51:15.598464Z
+1349
+ch
+

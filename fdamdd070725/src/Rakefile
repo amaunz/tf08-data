@@ -1,0 +1,74 @@
+require 'rake/clean'
+desc "Extract toxicity data and structures from DSSTox sdf"
+task :default do
+
+  @endpoints = Hash.new
+  sdf = Dir.glob("*.sdf")[0]
+  FileUtils.rm Dir.glob(File.join("../**","*.smi"))
+  FileUtils.rm Dir.glob(File.join("../**","*.act"))
+
+  File.open(sdf).each do |line|
+
+    line.chomp
+    unless line =~ /^\s+/
+
+      if line =~ /^>/ # read property type
+        @property = line
+
+      elsif line =~ /\$\$\$\$/ # print results
+
+        if @single_chemical
+
+          @endpoints.each do |e,v|
+
+            dir = "../" + e.gsub(/\s+/,'_').downcase
+            Dir.mkdir(dir) unless FileTest.directory?(dir)
+            dir = dir + "/data"
+            Dir.mkdir(dir) unless FileTest.directory?(dir)
+            base = dir + "/" + e.gsub(/\s+/,'_').downcase
+            smi = base + '.smi'
+            cl = base + '.act'
+
+            @smi = File.open(smi,"a") 
+            @classifications = File.open(cl,"a") 
+
+            @smi.puts @rid.chomp + "\t" + @smiles
+            @classifications.puts @rid.chomp + "\t\"" + e + "\"\t" + v 
+
+            @smi.close
+            @classifications.close
+
+          end
+        end
+
+        @endpoints = Hash.new
+        @smiles = ''
+        @rid = ''
+        @single_chemical = false
+
+      else  # parse data
+        case @property
+
+        when /DSSTox_RID/
+          @rid = line
+
+        when /STRUCTURE_SMILES/
+          @smiles = line
+
+        when  /TestSubstance_Description/
+          if line =~ /single chemical compound/
+            @single_chemical = true
+          else
+            @single_chemical = false
+          end
+
+        when /Dose_MRDD_mmol>/
+          @endpoints["Dose_MRDD_mmol"] = line
+
+        end
+      end
+    end
+  end
+end
+
+
